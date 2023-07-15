@@ -1,6 +1,6 @@
 package ru.factory.coffee.model;
 
-public interface Report {
+public interface StoreReport {
 
   String getType();
 

@@ -1,4 +1,4 @@
-package ru.my.kafka.kafkaspring.config;
+package ru.factory.coffee.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 public class KafkaTopicConf {
 
   @Bean
-  public KafkaAdmin kafkaAdmin(@Value("bootstrap.server") String bootstrapAddress) {
+  public KafkaAdmin kafkaAdmin(@Value("${bootstrap.servers}") String bootstrapAddress) {
     Map<String, Object> conf = new HashMap<>();
     conf.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
     return new KafkaAdmin(conf);

@@ -1,4 +1,4 @@
-package ru.my.kafka.kafkaspring.config;
+package ru.factory.coffee.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import org.yaml.snakeyaml.serializer.Serializer;
 @Configuration
 public class KafkaProducerConf {
 
-  @Value("bootstrap.server")
+  @Value("${bootstrap.servers}")
   private String bootstrapAddress;
 
   @Bean

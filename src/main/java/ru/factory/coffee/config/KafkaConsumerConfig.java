@@ -1,6 +1,9 @@
-package ru.my.kafka.kafkaspring.config;
+package ru.factory.coffee.config;
 
-import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.GROUP_ID_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG;
+import static org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +20,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 @Configuration
 public class KafkaConsumerConfig {
 
-  @Value("bootstrap.server")
+  @Value("${bootstrap.servers}")
   private String bootstrapAddress;
 
   @Bean

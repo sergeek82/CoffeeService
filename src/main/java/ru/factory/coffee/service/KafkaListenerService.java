@@ -1,11 +1,11 @@
-package ru.my.kafka.kafkaspring.service;
+package ru.factory.coffee.service;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import ru.my.kafka.kafkaspring.model.CoffeeStore;
-import ru.my.kafka.kafkaspring.repository.CoffeeStoreRepository;
+import ru.factory.coffee.model.Store;
+import ru.factory.coffee.repository.CoffeeStoreRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -13,10 +13,10 @@ public class KafkaListenerService {
 
   private final CoffeeStoreRepository repository;
 
-  @KafkaListener(topics = "PurchaseCoffeeTopic")
-  public void readMessage(ConsumerRecord<String, CoffeeStore> record) {
-    CoffeeStore coffeeStore = record.value();
-    repository.save(coffeeStore);
+  @KafkaListener(topics = "PurchaseCoffeeTopic",groupId = "coffee-plant-1")
+  public void readMessage(ConsumerRecord<String, Store> record) {
+    Store store = record.value();
+    repository.save(store);
   }
 
 }

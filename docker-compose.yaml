@@ -1,0 +1,44 @@
+version: "3.1"
+services:
+  mysql:
+    container_name: mysql
+    hostname: mysql
+    image: mysql:8.0.28
+    ports:
+      - '3306:3306'
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mysql
+    command: --general_log=1 --general_log_file=/var/lib/mysql/mysql.log --log_error_verbosity=3 --log-error=/var/lib/mysql/mysql-error.log --slow_query_log=1 --slow_query_log_file=/var/lib/mysql/mysql-slow.log --max_connections=120
+#    volumes:
+#      - /opt/mysql-data:/var/lib/mysql # проброс директории для хранения данных и логов (!) БД
+#    healthcheck:
+#      test: [ 'CMD-SHELL', '/usr/bin/mysql --user=root --password=root --protocol=TCP --execute "SHOW DATABASES;"' ]
+#      interval: 5s
+#      timeout: 3s
+#      retries: 50
+  zookeeper:
+    container_name: zookeeper
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - '2181:2181'
+
+  kafka:
+    container_name: kafka
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - '9092:9092'
+    environment:
+#      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
