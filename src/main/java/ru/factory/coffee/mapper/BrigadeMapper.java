@@ -10,6 +10,6 @@ public interface BrigadeMapper {
 
   BrigadeDto toDto(BrigadeReport brigadeReport);
 
-  List<BrigadeDto> toStoreDtoList(List<BrigadeReport> brigadeReportList);
+  List<BrigadeDto> toBrigadeDtoList(List<BrigadeReport> brigadeReportList);
 
 }

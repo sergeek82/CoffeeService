@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: CoffeeStoreAPI
+  description: CoffeeStoreAPI
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:8080'
+paths:
+  /api/store/remains/type:
+    get:
+      tags:
+        - Store
+      summary: Method to get remains by coffee type
+      operationId: getRemainsByType
+      parameters:
+        - in: query
+          name: type
+          description: the type of coffee
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreDtoList'
+
+  /api/store/remains/country:
+    get:
+      tags:
+        - Store
+      summary: Method to get remains by country
+      operationId: getRemainsByCountry
+      parameters:
+        - in: query
+          name: code
+          description: the code of country
+          required: true
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 3
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreDtoList'
+
+  /api/loss/brigade/:
+    get:
+      tags:
+        - Brigade
+      summary: Get loss percent by brigade name
+      operationId: getLossPercentByName
+      parameters:
+        - in: query
+          name: name
+          description: The name of brigade
+          required: true
+          schema:
+            type: string
+            maxLength: 32
+            minLength: 1
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrigadeDtoList'
+
+  /api/loss/brigade/country:
+    get:
+      tags:
+        - Brigade
+      summary: Get loss percent by country
+      operationId: getLossPercentByCountry
+      parameters:
+        - in: query
+          name: code
+          description: The country code
+          required: true
+          schema:
+            type: string
+            maxLength: 3
+            minLength: 1
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrigadeDtoList'
+
+components:
+  schemas:
+
+    BrigadeDto:
+      type: object
+      example:
+        brigadeName: Juniors
+        countryCode: BR
+        percent: 8.2
+      properties:
+        brigadeName:
+          type: string
+          description: The name of brigade
+        countryCode:
+          type: string
+          description: Country abbreviation
+        percent:
+          type: integer
+          format: int8
+
+    StoreDto:
+      type: object
+      example:
+        type: A
+        countryCode: BR
+        totalWeight: 3600
+      properties:
+        type:
+          type: string
+        countryCode:
+          type: string
+        totalWeight:
+          type: integer
+          format: int32
+
+    StoreDtoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StoreDto'
+
+    BrigadeDtoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BrigadeDto'
