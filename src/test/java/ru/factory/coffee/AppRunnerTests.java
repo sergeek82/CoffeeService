@@ -34,6 +34,7 @@ class AppRunnerTests {
 
   @Test
   void contextLoads() {
+    //Думаю тесты нужно делать используя TestContainers реализовать не хватило времени
   }
 
 }

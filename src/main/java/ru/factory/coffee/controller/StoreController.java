@@ -17,12 +17,10 @@ public class StoreController implements StoreApi {
   @Override
   public List<StoreDto> getRemainsByCountry(@NotNull String code) {
     return service.getRemainsByCountry(code);
-//    return StoreApi.super.getRemainsByCountry(code);
   }
 
   @Override
   public List<StoreDto> getRemainsByType(@NotNull String type) {
     return service.getRemainsByType(type);
-//    return StoreApi.super.getRemainsByType(type);
   }
 }

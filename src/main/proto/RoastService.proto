@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package ru.factory.coffee.grpc;
+
+message RoastRequest{
+  int64 storeId = 1;
+  int32 netWeight = 2;
+  string brigadeName = 3;
+}
+
+message RoastResponse{
+  int64 cookBrigadeId = 1;
+}
+
+service RoastService{
+  rpc executeRoast(RoastRequest)returns (RoastResponse);
+}
+

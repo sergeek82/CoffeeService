@@ -17,12 +17,10 @@ public class BrigadeController implements BrigadeApi {
   @Override
   public List<BrigadeDto> getLossPercentByCountry(@NotNull String code) {
     return service.getLossPercentByCountryCode(code);
-//    return BrigadeApi.super.getLossPercentByCountry(code);
   }
 
   @Override
   public List<BrigadeDto> getLossPercentByName(@NotNull String name) {
     return service.getLossPercentByBrigadeName(name);
-//    return BrigadeApi.super.getLossPercentByName(name);
   }
 }
