@@ -133,6 +133,23 @@ components:
           type: integer
           format: int32
 
+    StoreFullDto:
+      type: object
+      properties:
+        grossWeight:
+          type: integer
+          format: int32
+        robusta:
+          type: integer
+          format: int8
+        arabica:
+          type: integer
+          format: int8
+        countryCode:
+          type: string
+        type:
+          type: string
+
     StoreDtoList:
       type: array
       items:

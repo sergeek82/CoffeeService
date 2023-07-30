@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.factory.coffee.dto.StoreDto;
+import ru.factory.coffee.dto.StoreFullDto;
 import ru.factory.coffee.mapper.StoreMapper;
+import ru.factory.coffee.model.Store;
 import ru.factory.coffee.model.StoreReport;
 import ru.factory.coffee.repository.CoffeeStoreRepository;
 
@@ -27,6 +29,12 @@ public class StoreService {
   public List<StoreDto> getRemainsByType(String type) {
     List<StoreReport> reportByType = storeRepository.getReportByType(type);
     return mapper.toStoreDtoList(reportByType);
+  }
+
+  @Transactional
+  public StoreFullDto addRecord(StoreFullDto storeFullDto) {
+    Store store = mapper.toEntity(storeFullDto);
+    return mapper.toFullDto(storeRepository.save(store));
   }
 
 }
